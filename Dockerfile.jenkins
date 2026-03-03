@@ -1,0 +1,22 @@
+#Use Jenkins LTS with Java 17
+FROM jenkins/jenkins:lts-jdk17
+
+#Set Environment Variables for Spring Boot application
+ENV JWK_SET_URI="http://keycloak:8080/realms/occassionsreminder-dev/protocol/openid-connect/certs"
+ENV KEYCLOAK_BASE="http://keycloak:8080/"
+ENV KEYCLOAK_REALM="occassionsreminder-dev"
+ENV KEYCLOAK_SERVER_API_CLIENTID="ocassionsdev-admin"
+ENV KEYCLOAK_SERVICE_API_SECRET="e9DMK7SXsrGqCLh4vaQ36fAjVqTa9Wua"
+ENV KEYCLOAK_TOKEN_END_POINT="http://keycloak:8080/realms/occassionsreminder-dev/protocol/openid-connect/token"
+ENV ISSUER_URI="http://keycloak:8080/realms/occassionsreminder-dev"
+
+#Switch to root to install Maven
+USER root
+
+#Intstall Maven
+RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
+
+#Switch back to the jenkins user
+USER jenkins
+
+

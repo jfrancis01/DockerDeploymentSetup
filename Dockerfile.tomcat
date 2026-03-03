@@ -1,0 +1,32 @@
+#Use Jenkins LTS with Java 17
+FROM tomcat:10.1-jdk17-temurin
+
+#Set working directory
+WORKDIR /usr/local/tomcat
+
+#Set Environment Variables for Spring Boot application
+ENV JWK_SET_URI="http://keycloak:8080/realms/occassionsreminder-dev/protocol/openid-connect/certs"
+ENV KEYCLOAK_BASE="http://keycloak:8080/"
+ENV KEYCLOAK_REALM="occassionsreminder-dev"
+ENV KEYCLOAK_SERVER_API_CLIENTID="ocassionsdev-admin"
+ENV KEYCLOAK_SERVICE_API_SECRET="e9DMK7SXsrGqCLh4vaQ36fAjVqTa9Wua"
+ENV KEYCLOAK_TOKEN_END_POINT="http://keycloak:8080/realms/occassionsreminder-dev/protocol/openid-connect/token"
+ENV ISSUER_URI="http://keycloak:8080/realms/occassionsreminder-dev"
+
+#Switch to the root user
+USER root
+
+#Clean up webapps folder
+RUN mv webapps webapps2
+RUN mv webapps.dist/ webapps
+
+#Clean up context and set users
+COPY context.xml /usr/local/tomcat/webapps/manager/META-INF/context.xml
+COPY context.xml /usr/local/tomcat/webapps/host-manager/META-INF/context.xml
+COPY tomcat-users.xml /usr/local/tomcat/conf/tomcat-users.xml
+
+#Port to expose tomcat
+EXPOSE 9000
+
+
+
