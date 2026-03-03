@@ -1,5 +1,13 @@
+# Stage 1: Use the official Node.js image to install Node.js and npm
+#FROM node:22 AS nodejs
+
 #Use Jenkins LTS with Java 17
 FROM jenkins/jenkins:lts-jdk17
+
+# Copy the Node.js and npm binaries from the first stage into the Jenkins image
+# This ensures node and npm are available in the Jenkins environment
+#COPY --from=nodejs /usr/local/bin/node /usr/local/bin/node
+#COPY --from=nodejs /usr/local/bin/npm /usr/local/bin/npm
 
 #Set Environment Variables for Spring Boot application
 ENV JWK_SET_URI="http://keycloak:8080/realms/occassionsreminder-dev/protocol/openid-connect/certs"
@@ -13,8 +21,21 @@ ENV ISSUER_URI="http://keycloak:8080/realms/occassionsreminder-dev"
 #Switch to root to install Maven
 USER root
 
+# Install Node.js and npm using apt-get (for Debian-based images used by default Jenkins Lts)
+RUN apt-get update && apt-get install -y nodejs npm && rm -rf /var/lib/apt/lists/*
+
+# Verify Node.js and npm installation
+RUN node -v
+RUN npm -v
+
+# Install Angular CLI globally
+RUN npm install -g @angular/cli
+
 #Intstall Maven
 RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
+
+#Install Angular
+RUN npm install -g @angular/cli@19.1.8
 
 #Switch back to the jenkins user
 USER jenkins
