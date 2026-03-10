@@ -22,3 +22,6 @@ This is done via profiles. Create multiple "application.properties files". Ex: a
 
 ### How can you test the sprinboot app has been deployed correctly?
 http://localhost:9000/occassionsreminder/welcome
+
+### How are URLS changed for the Angular application for development and production?
+By creating an environments folder in the /app directory and creating an environment.ts and environment.development.ts files
