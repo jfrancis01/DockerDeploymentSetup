@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello From Nginx</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+    <h1>Today's Date is:</h1>
+    <!-- The current date will be displayed in this paragraph -->
+    <p id="current-date-display"></p>
+
+    <script>
+        // Create a new Date object for the current date and time
+        var today = new Date();
+
+        // Format the date as a readable string (e.g., "Mon Jul 27 2020")
+        // Alternatively, use methods like toLocaleDateString() for more control
+        var dateString = today.toDateString();
+
+        // Get the HTML element by its ID
+        var dateElement = document.getElementById("current-date-display");
+
+        // Update the content of the HTML element with the date string
+        dateElement.textContent = dateString;
+    </script>
+
+</body>
+</html>
