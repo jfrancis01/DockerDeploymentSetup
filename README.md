@@ -17,6 +17,8 @@ The Jenkins server will build and deploy the angular app to the nginx service th
 ### How is this deployment from a jenkins container to an nginx container achieved? 
 This is achieved by creating a bind mount that is sahred by the two containers. Appropriate permissions need to be given to this local folder so that the containers have read write access. 
 
+### How to configure angular app running on nginx container to communicate with keycloak on another container
+
 ### How are URLS changed for the back end spring boot application for development and production?
 This is done via profiles. Create multiple "application.properties files". Ex: application-dev.properties and application-prod.properties
 
