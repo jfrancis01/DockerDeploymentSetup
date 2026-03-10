@@ -12,6 +12,8 @@ DOCKER COMPOSE EXECUTION:
 
 All the services run on the same network: dev-ops 
 
-TO DO: 
-1. Add Nginx server service to host and serve the static Angular pages of the application
-2. Write A Jenkins job to build and deployb the Angular application 
+The Jenkins server will build and deploy the angular app to the nginx service that runs in a seprate container. Containers runb in silos and have limited communication between each other. The Angular build process creates a dist/app-name/browser folder that needs to be copied to the /user/share/nginx/html folder. 
+
+How is this achieved? 
+This is achieved by creating a bind mount that is sahred by the two containers. Appropriate permissions need to be given to this local folder so that the containers have read write access. 
+
