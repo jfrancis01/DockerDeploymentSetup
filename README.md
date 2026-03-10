@@ -19,3 +19,6 @@ This is achieved by creating a bind mount that is sahred by the two containers. 
 
 ### How are URLS changed for the back end spring boot application for development and production?
 This is done via profiles. Create multiple "application.properties files". Ex: application-dev.properties and application-prod.properties
+
+### How can you test the sprinboot app has been deployed correctly?
+http://localhost:9000/occassionsreminder/welcome
